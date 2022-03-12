@@ -4,6 +4,7 @@ import morgan from "morgan";
 import mongoose from "mongoose";
 
 import productRouter from "../routers/product"
+import postRouter from "../routers/post"
 
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(express.json())
 
 //route
 app.use(productRouter);
+app.use(postRouter);
 
 //connection database
 mongoose.connect('mongodb://localhost:27017/we16309')
