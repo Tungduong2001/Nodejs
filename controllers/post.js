@@ -34,3 +34,14 @@ export const GetOnePost = async (req, res) => {
         })
     }
 }
+
+export const Delete = async (req, res) => {
+    try {
+        const post = await Post.findByIdAndRemove(req.params.id)
+        res.json(post)
+    } catch (error) {
+        res.status(400).json({
+            message: "Không tìm được sản phẩm"
+        })
+    }
+}

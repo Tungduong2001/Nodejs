@@ -37,9 +37,24 @@ export const AddProduct = async (req, res) => {
         })
     }
 }
-export const Delete = (req, res) => {
-    res.json(products.filter(item => item.id !== +req.params.id))
+export const Delete = async (req, res) => {
+    try {
+        const product = await Product.findByIdAndRemove(req.params.id)
+        res.json(product)
+    } catch (error) {
+        res.status(400).json({
+            message: "Không tìm được sản phẩm"
+        })
+    }
 }
-export const Update = (req, res) => {
-    res.json(products.map(item => item.id == req.params.id ? req.body : item))
+export const Update = async (req, res) => {
+    try {
+        const product = await Product.findByIdAndUpdate(req.params.id)
+        res.json(product)
+    } catch (error) {
+        res.status(400).json({
+            message: "Không tìm được sản phẩm"
+        })
+    }
+    // res.json(products.map(item => item.id == req.params.id ? req.body : item))
 }
