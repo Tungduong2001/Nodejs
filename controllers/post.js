@@ -4,8 +4,8 @@ const Post = mongoose.model('Post', { title: String, image: String, content: Str
 
 export const AddPost = async (req, res) => {
     try {
-        const post = await new Post(req.body).save()
-        res.json(post)
+        const addPost = await new Post(req.body).save()
+        res.json(addPost)
     } catch (error) {
         res.status(400).json({
             message: "Không thêm được bài viết"
@@ -15,8 +15,8 @@ export const AddPost = async (req, res) => {
 
 export const ListPost = async (req, res) => {
     try {
-        const posts = await Post.find()
-        res.json(posts)
+        const listPost = await Post.find()
+        res.json(listPost)
     } catch (error) {
         res.status(400).json({
             message: "Không tìm được sản phẩm"
@@ -26,8 +26,8 @@ export const ListPost = async (req, res) => {
 
 export const GetOnePost = async (req, res) => {
     try {
-        const post = await Post.findById(req.params.id)
-        res.json(post)
+        const getOne = await Post.findById(req.params.id)
+        res.json(getOne)
     } catch (error) {
         res.status(400).json({
             message: "Không tìm được sản phẩm"
@@ -37,8 +37,19 @@ export const GetOnePost = async (req, res) => {
 
 export const Delete = async (req, res) => {
     try {
-        const post = await Post.findByIdAndRemove(req.params.id)
-        res.json(post)
+        const remove = await Post.findByIdAndRemove(req.params.id)
+        res.json(remove)
+    } catch (error) {
+        res.status(400).json({
+            message: "Không tìm được sản phẩm"
+        })
+    }
+}
+
+export const Update = async (req, res) => {
+    try {
+        const update = await Post.findByIdAndUpdate(req.params.id, req.body)
+        res.json(update)
     } catch (error) {
         res.status(400).json({
             message: "Không tìm được sản phẩm"
