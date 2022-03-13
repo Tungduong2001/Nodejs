@@ -3,6 +3,7 @@ import cors from "cors"
 import morgan from "morgan";
 import mongoose from "mongoose";
 
+//import router
 import productRouter from "../routers/product"
 import postRouter from "../routers/post"
 
