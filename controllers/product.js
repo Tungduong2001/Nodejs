@@ -1,9 +1,5 @@
 import mongoose from "mongoose"
 
-// const products = [
-//     { id: 1, name: "Product A" },
-//     { id: 2, name: "Product B" }
-// ];
 const Product = mongoose.model('Product', { name: String, image: String, price: Number, desc: String })
 
 export const List = async (req, res) => {
@@ -40,7 +36,10 @@ export const AddProduct = async (req, res) => {
 export const Delete = async (req, res) => {
     try {
         const remove = await Product.findByIdAndRemove(req.params.id)
-        res.json(remove)
+        res.json({
+            message: "Xóa thành công",
+            data: remove
+        })
     } catch (error) {
         res.status(400).json({
             message: "Không tìm được sản phẩm"
@@ -49,7 +48,7 @@ export const Delete = async (req, res) => {
 }
 export const Update = async (req, res) => {
     try {
-        const update = await Product.findByIdAndUpdate(req.params.id, req.body)
+        const update = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true })
         res.json(update)
     } catch (error) {
         res.status(400).json({

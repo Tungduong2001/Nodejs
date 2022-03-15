@@ -38,7 +38,10 @@ export const GetOnePost = async (req, res) => {
 export const Delete = async (req, res) => {
     try {
         const remove = await Post.findByIdAndRemove(req.params.id)
-        res.json(remove)
+        res.json({
+            message: "Xóa thành công",
+            data: remove
+        })
     } catch (error) {
         res.status(400).json({
             message: "Không tìm được sản phẩm"
@@ -48,7 +51,7 @@ export const Delete = async (req, res) => {
 
 export const Update = async (req, res) => {
     try {
-        const update = await Post.findByIdAndUpdate(req.params.id, req.body)
+        const update = await Post.findByIdAndUpdate(req.params.id, req.body, { new: true })
         res.json(update)
     } catch (error) {
         res.status(400).json({
