@@ -3,13 +3,19 @@ import User from '../models/user'
 export const signIn = async (req, res) => {
     try {
         const login = await User.findOne({ email: req.body.email, password: req.body.password })
-        res.json({
-            message: "Đăng nhập thành công",
-            data: login
-        })
+        if (login) {
+            res.json({
+                message: "Đăng nhập thành công",
+                data: login
+            })
+        } else {
+            res.status(400).json({
+                message: "Tài khoản hoặc mật khẩu không chính xác"
+            })
+        }
     } catch (error) {
         res.status(400).json({
-            message: "Không tồn tại tài khoản"
+            message: "Tài khoản hoặc mật khẩu không chính xác"
         })
     }
 }
