@@ -1,5 +1,19 @@
 import User from '../models/user'
 
+export const signIn = async (req, res) => {
+    try {
+        const login = await User.findOne({ email: req.body.email, password: req.body.password })
+        res.json({
+            message: "Đăng nhập thành công",
+            data: login
+        })
+    } catch (error) {
+        res.status(400).json({
+            message: "Không tồn tại tài khoản"
+        })
+    }
+}
+
 export const AddUser = async (req, res) => {
     try {
         const addUser = await new User(req.body).save()
