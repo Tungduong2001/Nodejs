@@ -1,18 +1,30 @@
-import Product from '../models/product'
+import User from '../models/user'
 
-export const List = async (req, res) => {
+export const AddUser = async (req, res) => {
     try {
-        const listProduct = await Product.find()
-        res.json(listProduct)
+        const addUser = await new User(req.body).save()
+        res.json(addUser)
+    } catch (error) {
+        res.status(400).json({
+            message: "Không thêm được bài viết"
+        })
+    }
+}
+
+export const ListUser = async (req, res) => {
+    try {
+        const listUser = await User.find()
+        res.json(listUser)
     } catch (error) {
         res.status(400).json({
             message: "Không tìm được sản phẩm"
         })
     }
 }
-export const GetOneProduct = async (req, res) => {
+
+export const GetOneUser = async (req, res) => {
     try {
-        const getOne = await Product.findById(req.params.id)
+        const getOne = await User.findById(req.params.id)
         res.json(getOne)
     } catch (error) {
         res.status(400).json({
@@ -20,20 +32,10 @@ export const GetOneProduct = async (req, res) => {
         })
     }
 }
-export const AddProduct = async (req, res) => {
-    // products.push(req.body);
-    try {
-        const addProduct = await new Product(req.body).save()
-        res.json(addProduct)
-    } catch (error) {
-        res.status(400).json({
-            message: "Không thêm được sản phẩm"
-        })
-    }
-}
+
 export const Delete = async (req, res) => {
     try {
-        const remove = await Product.findByIdAndRemove(req.params.id)
+        const remove = await User.findByIdAndRemove(req.params.id)
         res.json({
             message: "Xóa thành công",
             data: remove
@@ -44,9 +46,10 @@ export const Delete = async (req, res) => {
         })
     }
 }
+
 export const Update = async (req, res) => {
     try {
-        const update = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        const update = await User.findByIdAndUpdate(req.params.id, req.body, { new: true })
         res.json(update)
     } catch (error) {
         res.status(400).json({

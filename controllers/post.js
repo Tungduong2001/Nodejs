@@ -1,5 +1,4 @@
-import mongoose from "mongoose"
-const Post = mongoose.model('Post', { title: String, image: String, content: String })
+import Post from '../models/post'
 
 
 export const AddPost = async (req, res) => {

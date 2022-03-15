@@ -4,8 +4,8 @@ const router = Router();
 import { checkAuth } from "../middlewares/checkAuth"
 
 router.get("/api/posts", checkAuth, ListPost)
-router.get("/api/posts/:id", checkAuth, GetOnePost)
-router.post("/api/posts", checkAuth, AddPost)
-router.delete("/api/posts/:id", checkAuth, Delete)
-router.put("/api/posts/:id", checkAuth, Update)
+router.get("/api/post/:id", checkAuth, GetOnePost)
+router.post("/api/post", checkAuth, AddPost)
+router.delete("/api/post/:id", checkAuth, Delete)
+router.put("/api/post/:id", checkAuth, Update)
 export default router;
