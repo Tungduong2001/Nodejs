@@ -4,9 +4,10 @@ import morgan from "morgan";
 import mongoose from "mongoose";
 
 //import router
-import productRouter from "../routers/product"
-import postRouter from "../routers/post"
-import userRouter from "../routers/user"
+import productRoute from "../routers/product"
+import postRoute from "../routers/post"
+import userRoute from "../routers/user"
+import categoryRoute from "../routers/category";
 
 
 const app = express();
@@ -17,9 +18,10 @@ app.use(morgan('tiny'));
 app.use(express.json())
 
 //route
-app.use(productRouter);
-app.use(postRouter);
-app.use(userRouter)
+app.use(productRoute);
+app.use(postRoute);
+app.use(userRoute)
+app.use("/api", categoryRoute)
 
 //connection database
 mongoose.connect('mongodb://localhost:27017/we16309')

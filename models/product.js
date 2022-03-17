@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import { Schema } from "mongoose";
+import mongoose, { Schema, ObjectId } from "mongoose";
+
 const productChema = new Schema({
     name: {
         type: String,
@@ -13,6 +13,10 @@ const productChema = new Schema({
     price: {
         type: Number,
         required: true
+    },
+    category: {
+        type: ObjectId,
+        ref: "Category"
     },
     desc: {
         type: String,
