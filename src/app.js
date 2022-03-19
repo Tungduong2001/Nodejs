@@ -18,10 +18,10 @@ app.use(morgan('tiny'));
 app.use(express.json())
 
 //route
-app.use(productRoute);
-app.use(postRoute);
+app.use("/api", productRoute);
+app.use("/api", postRoute);
 app.use(userRoute)
-app.use("/api", categoryRoute)
+app.use("/apiapi", categoryRoute)
 
 //connection database
 mongoose.connect('mongodb://localhost:27017/we16309')

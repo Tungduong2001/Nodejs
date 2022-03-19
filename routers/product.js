@@ -3,9 +3,9 @@ import { AddProduct, Delete, GetOneProduct, List, Update } from "../controllers/
 const router = Router();
 import { checkAuth } from "../middlewares/checkAuth"
 
-router.get("/api/products", checkAuth, List)
-router.get("/api/product/:id", checkAuth, GetOneProduct)
-router.post("/api/product", checkAuth, AddProduct)
-router.delete("/api/product/:id", checkAuth, Delete)
-router.put("/api/product/:id", checkAuth, Update)
+router.get("/products", checkAuth, List)
+router.get("/product/:id", checkAuth, GetOneProduct)
+router.post("/product", checkAuth, AddProduct)
+router.delete("/product/:id", checkAuth, Delete)
+router.put("/product/:id", checkAuth, Update)
 export default router;
