@@ -10,6 +10,15 @@ export const AddCategory = async (req, res) => {
     }
 }
 
+export const ListCategory = async (req, res) => {
+    try {
+        const category = await Category.find().exec()
+        res.json(category)
+    } catch (error) {
+        res.status(400).json({ error })
+    }
+}
+
 export const DetailCate = async (req, res) => {
     try {
         const category = await Category.findOne({ _id: req.params.id }).exec()
@@ -17,6 +26,18 @@ export const DetailCate = async (req, res) => {
         res.json({
             category,
             product
+        })
+    } catch (error) {
+        res.status(400).json({ error })
+    }
+}
+
+export const RemoveCate = async (req, res) => {
+    try {
+        const category = await Category.findOneAndDelete({ _id: req.params.id }).exec()
+        res.json({
+            message: "Xóa thành công",
+            category
         })
     } catch (error) {
         res.status(400).json({ error })
