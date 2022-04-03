@@ -1,10 +1,12 @@
 import mongoose, { Schema, ObjectId } from "mongoose";
 
-const productChema = new Schema({
+const productSchema = new Schema({
     name: {
         type: String,
         minlength: 5,
-        required: true
+        required: true,
+        unique: true,
+        index: true
     },
     image: {
         type: String,
@@ -24,4 +26,5 @@ const productChema = new Schema({
     }
 }, { timestamps: true });
 
-export default mongoose.model('Product', productChema)
+productSchema.index({ "$**": 'text' });
+export default mongoose.model('Product', productSchema)

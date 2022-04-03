@@ -54,3 +54,16 @@ export const Update = async (req, res) => {
         })
     }
 }
+
+export const search = async (req, res) => {
+    try {
+        // console.log(req.query);
+        const searchString = req.query.q ? req.query.q : "";
+        const result = await Product.find({ $text: { $search: searchString } }).exec();
+        res.json(result)
+    } catch (error) {
+        res.status(400).json({
+            message: "không tìm thấy sản phẩm"
+        })
+    }
+}
