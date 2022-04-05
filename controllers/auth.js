@@ -1,6 +1,5 @@
 import User from "../models/user";
 import jwt from 'jsonwebtoken';
-import user from "../models/user";
 export const signUp = async (req, res) => {
     const { name, email, password } = req.body
     try {
@@ -55,24 +54,3 @@ export const signIn = async (req, res) => {
     }
 }
 
-export const listUser = async (req, res) => {
-    try {
-        const user = await User.find().exec()
-        res.json(user)
-    } catch (error) {
-        res.status(400).json({
-            message: "Không tìm được user"
-        })
-    }
-}
-
-export const removeUser = async (req, res) => {
-    try {
-        const user = await User.findOneAndDelete({ _id: req.params.id }).exec()
-        res.json(user)
-    } catch (error) {
-        res.status(400).json({
-            message: "Xóa không thành công"
-        })
-    }
-}
