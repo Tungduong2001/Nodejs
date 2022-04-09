@@ -1,8 +1,10 @@
+import Formidable from 'formidable'
 import Product from '../models/product'
+import { cloudinaryUpload } from '../utils/cloudinary'
 
 export const List = async (req, res) => {
     try {
-        const listProduct = await Product.find()
+        const listProduct = await Product.find().exec()
         res.json(listProduct)
     } catch (error) {
         res.status(400).json({
@@ -12,7 +14,7 @@ export const List = async (req, res) => {
 }
 export const GetOneProduct = async (req, res) => {
     try {
-        const getOne = await Product.findById(req.params.id)
+        const getOne = await Product.findById(req.params.id).exec()
         res.json(getOne)
     } catch (error) {
         res.status(400).json({
@@ -21,7 +23,6 @@ export const GetOneProduct = async (req, res) => {
     }
 }
 export const AddProduct = async (req, res) => {
-    // products.push(req.body);
     try {
         const addProduct = await new Product(req.body).save()
         res.json(addProduct)
@@ -31,9 +32,16 @@ export const AddProduct = async (req, res) => {
         })
     }
 }
+export const UploadImage = async (req, res) => {
+    const form = new Formidable.IncomingForm();
+    form.parse(req, async (err, fields, files) => {
+        const result = await cloudinaryUpload(files.image.filepath)
+        res.json(result)
+    })
+}
 export const Delete = async (req, res) => {
     try {
-        const remove = await Product.findByIdAndRemove(req.params.id)
+        const remove = await Product.findByIdAndRemove(req.params.id).exec()
         res.json({
             message: "Xóa thành công",
             data: remove
@@ -46,7 +54,7 @@ export const Delete = async (req, res) => {
 }
 export const Update = async (req, res) => {
     try {
-        const update = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        const update = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true }).exec()
         res.json(update)
     } catch (error) {
         res.status(400).json({
@@ -59,7 +67,7 @@ export const search = async (req, res) => {
     try {
         // console.log(req.query);
         const searchString = req.query.q ? req.query.q : "";
-        const result = await Product.find({ $text: { $search: searchString } }).exec();
+        const result = await Product.find({ name: new RegExp(searchString, "i") }).exec();
         res.json(result)
     } catch (error) {
         res.status(400).json({

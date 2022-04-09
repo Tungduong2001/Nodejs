@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors"
 import morgan from "morgan";
 import mongoose from "mongoose";
+import cloudinary from "cloudinary"
 
 //import router
 import productRoute from "../routers/product"
@@ -12,6 +13,12 @@ import userRoute from "../routers/user"
 
 
 const app = express();
+
+cloudinary.config({
+    cloud_name: "asm-js-ecma",
+    api_key: "213758365116598",
+    api_secret: "W-KjW-n9vwBY2mWUMKs4FSyOeYQ"
+});
 
 //middleware
 app.use(cors());
