@@ -31,13 +31,17 @@ app.use("/api", postRoute);
 app.use("/api", categoryRoute)
 app.use("/api", authRoute)
 app.use("/api", userRoute)
+
+// const MONGODB_LOCAL = "mongodb://localhost:27017/we16309";
+const MONGODB_CLOUD = "mongodb+srv://duong:Duong2001@cluster0.c6egu.mongodb.net/dbname?retryWrites=true&w=majority";
+
 //connection database
-mongoose.connect('mongodb://localhost:27017/we16309')
+mongoose.connect(MONGODB_CLOUD)
     .then(() => console.log("Kết nối DB thành công"))
     .catch((error) => console.log(error));
 
 //connection
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
     console.log("Server is running port", PORT);
 }) 
