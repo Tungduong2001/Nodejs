@@ -10,6 +10,7 @@ import postRoute from "../routers/post"
 import categoryRoute from "../routers/category";
 import authRoute from "../routers/auth"
 import userRoute from "../routers/user"
+import slideRoute from "../routers/slide"
 
 
 const app = express();
@@ -31,12 +32,13 @@ app.use("/api", postRoute);
 app.use("/api", categoryRoute)
 app.use("/api", authRoute)
 app.use("/api", userRoute)
+app.use("/api", slideRoute)
 
-// const MONGODB_LOCAL = "mongodb://localhost:27017/we16309";
-const MONGODB_CLOUD = "mongodb+srv://duong:Duong2001@cluster0.c6egu.mongodb.net/dbname?retryWrites=true&w=majority";
+const MONGODB_LOCAL = "mongodb://localhost:27017/we16309";
+// const MONGODB_CLOUD = "mongodb+srv://duong:Duong2001@cluster0.c6egu.mongodb.net/dbname?retryWrites=true&w=majority";
 
 //connection database
-mongoose.connect(MONGODB_CLOUD)
+mongoose.connect(MONGODB_LOCAL)
     .then(() => console.log("Kết nối DB thành công"))
     .catch((error) => console.log(error));
 
