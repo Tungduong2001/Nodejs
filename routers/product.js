@@ -5,11 +5,11 @@ const router = Router();
 import { checkAuth, isAdmin, isAuth, requireSignin } from "../middlewares/checkAuth"
 
 router.get("/products", checkAuth, List)
-router.get("/product/:id", checkAuth, GetOneProduct)
-router.post("/product/:userId", requireSignin, isAuth, isAdmin, AddProduct)
-router.delete("/product/:id/:userId", requireSignin, isAuth, isAdmin, Delete)
-router.put("/product/:id/:userId", requireSignin, isAuth, isAdmin, Update)
-router.post("/search", search)
+router.get("/products/:id", GetOneProduct)
+router.post("/products", AddProduct)
+router.delete("/products/:id", Delete)
+router.patch("/products/:id", Update)
+router.get("/search", search)
 router.post("/upload-image", UploadImage)
 
 router.param("userId", userById)

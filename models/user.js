@@ -11,9 +11,6 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    salt: {
-        type: String
-    },
     password: {
         type: String,
         required: true
@@ -21,6 +18,10 @@ const userSchema = new Schema({
     role: {
         type: Number,
         default: 0
+    },
+    status: {
+        type: Boolean,
+        default: true
     }
 }, { timestamps: true });
 
@@ -38,7 +39,6 @@ userSchema.methods = {
     }
 }
 
-// trước khi execute .save() thì chạy middleware sau
 userSchema.pre("save", function (next) {
     this.password = this.encryPassword(this.password);
     next()

@@ -14,7 +14,7 @@ export const signUp = async (req, res) => {
                 user: {
                     _id: user._id,
                     name: user.name,
-                    email: user.email,
+                    email: user.email
                 }
             })
         }
@@ -45,7 +45,8 @@ export const signIn = async (req, res) => {
                     _id: user._id,
                     name: user.name,
                     email: user.email,
-                    role: user.role
+                    role: user.role,
+                    status: user.status
                 }
             })
         }

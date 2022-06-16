@@ -1,12 +1,13 @@
 import { Router } from "express";
-import { AddCategory, DetailCate, ListCategory, RemoveCate } from "../controllers/category";
+import { AddCategory, DetailCate, ListCategory, RemoveCate, Update } from "../controllers/category";
 
 const router = Router()
 import { checkAuth } from "../middlewares/checkAuth";
 
-router.post('/category', checkAuth, AddCategory);
-router.get('/category/:id', checkAuth, DetailCate);
-router.delete('/category/:id', checkAuth, RemoveCate);
-router.get('/category', checkAuth, ListCategory);
+router.post('/category', AddCategory);
+router.get('/category/:id', DetailCate);
+router.delete('/category/:id', RemoveCate);
+router.get('/category', ListCategory);
+router.patch('/category/:id', Update);
 
 export default router

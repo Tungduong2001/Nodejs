@@ -36,3 +36,14 @@ export const removeUser = async (req, res) => {
         })
     }
 }
+
+export const Update = async (req, res) => {
+    try {
+        const update = await User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }).exec()
+        res.json(update)
+    } catch (error) {
+        res.status(400).json({
+            message: "Không tìm được sản phẩm"
+        })
+    }
+}

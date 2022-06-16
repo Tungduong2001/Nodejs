@@ -54,7 +54,7 @@ export const Delete = async (req, res) => {
 }
 export const Update = async (req, res) => {
     try {
-        const update = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true }).exec()
+        const update = await Product.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }).exec()
         res.json(update)
     } catch (error) {
         res.status(400).json({

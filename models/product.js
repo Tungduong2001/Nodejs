@@ -10,19 +10,27 @@ const productSchema = new Schema({
     },
     image: {
         type: String,
-        required: true
+        // required: true
     },
     price: {
         type: Number,
-        required: true
+        // required: true
+    },
+    discount: {
+        type: Number,
+        default: 0
     },
     category: {
-        type: mongoose.Schema.ObjectId,
+        type: ObjectId,
         ref: "Category"
     },
     desc: {
         type: String,
-        required: true
+        // required: true
+    },
+    status: {
+        type: Boolean,
+        default: true
     }
 }, { timestamps: true });
 

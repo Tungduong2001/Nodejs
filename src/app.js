@@ -11,6 +11,8 @@ import categoryRoute from "../routers/category";
 import authRoute from "../routers/auth"
 import userRoute from "../routers/user"
 import slideRoute from "../routers/slide"
+import ordersRoute from "../routers/orders"
+import orderDetail from "../routers/orderDetail";
 
 
 const app = express();
@@ -33,6 +35,8 @@ app.use("/api", categoryRoute)
 app.use("/api", authRoute)
 app.use("/api", userRoute)
 app.use("/api", slideRoute)
+app.use('/api', ordersRoute)
+app.use('/api', orderDetail)
 
 const MONGODB_LOCAL = "mongodb://localhost:27017/we16309";
 // const MONGODB_CLOUD = "mongodb+srv://duong:Duong2001@cluster0.c6egu.mongodb.net/dbname?retryWrites=true&w=majority";
@@ -46,4 +50,4 @@ mongoose.connect(MONGODB_LOCAL)
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
     console.log("Server is running port", PORT);
-}) 
+})
